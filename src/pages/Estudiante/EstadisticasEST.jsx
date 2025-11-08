@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer } from "recharts";
-import { Search, User, Settings } from "lucide-react";
+import { Search, User, Settings, ArrowLeft } from "lucide-react";
 
 // === Componentes locales ===
 function Card({ children, className }) {
-  // bg-white se aplica solo si no pasas ningún className con color
   return (
     <div className={`shadow-md rounded-xl ${className || "bg-white"}`}>
       {children}
@@ -41,24 +40,41 @@ const data = [
 export default function Dashboard() {
   const [search, setSearch] = useState("");
 
+  // Función para regresar
+  const handleRegresar = () => {
+    window.history.back();
+  };
+
   return (
     <div className="h-screen w-screen bg-gray-100 flex flex-col overflow-hidden">
       {/* Header */}
       <header className="bg-white shadow-md flex justify-between items-center px-4 md:px-10 py-3">
-        <div className="flex items-center gap-2">
+        {/* Botón Regresar */}
+        <button
+          onClick={handleRegresar}
+          className="flex items-center gap-2 text-gray-700 hover:text-blue-600 font-medium transition-colors mr-4"
+        >
+          <ArrowLeft className="w-5 h-5" />
+          <span className="hidden sm:inline">Regresar</span>
+        </button>
+
+        {/* Búsqueda */}
+        <div className="flex items-center gap-2 flex-1 max-w-md">
           <input
             type="text"
             placeholder="Buscar cursos..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="border rounded-md px-3 py-1 w-40 md:w-72 focus:outline-none"
+            className="border rounded-md px-3 py-1 w-full focus:outline-none focus:ring-2 focus:ring-blue-500"
           />
           <Search className="text-gray-500" />
         </div>
 
+        {/* Botón Ver cursos */}
         <Button>Ver cursos disponibles</Button>
 
-        <div className="flex items-center gap-2">
+        {/* Perfil */}
+        <div className="flex items-center gap-2 ml-4">
           <div className="bg-gray-800 text-white p-2 rounded-md">
             <User size={18} />
           </div>
@@ -102,8 +118,8 @@ export default function Dashboard() {
           <Card className="p-4 flex flex-col justify-between h-full hover:scale-105 transition-transform">
             <div>
               <h2 className="text-lg font-bold mb-4">Curso en curso</h2>
-              <div className="flex items-center gap-3 mb-4 ">
-                <div className="bg-gray-800 text-white px-3 py-1 rounded-md font-bold ">NU</div>
+              <div className="flex items-center gap-3 mb-4">
+                <div className="bg-gray-800 text-white px-3 py-1 rounded-md font-bold">NU</div>
                 <div className="flex-1 bg-gray-200 rounded-full h-5">
                   <div
                     className="bg-green-500 h-5 rounded-full text-xs text-white text-center"
@@ -114,7 +130,7 @@ export default function Dashboard() {
                 </div>
               </div>
 
-              <div className="bg-gray-100 rounded-md p-4 ">
+              <div className="bg-gray-100 rounded-md p-4">
                 <h3 className="text-md font-semibold mb-2">Avances académicos</h3>
                 <ul className="text-sm space-y-1">
                   <li className="flex justify-between">

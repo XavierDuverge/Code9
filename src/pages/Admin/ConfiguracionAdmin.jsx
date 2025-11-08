@@ -1,10 +1,16 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function PerfilAdmin() {
+  const navigate = useNavigate();
+
   return (
     <div className="min-h-screen bg-gray-50 p-6 font-sans">
       {/* Botón regresar */}
-      <button className="flex items-center text-gray-700 text-sm mb-6 hover:underline">
+      <button
+        onClick={() => navigate("/admin")}
+        className="flex items-center text-gray-700 text-sm mb-6 hover:underline"
+      >
         ← regresar
       </button>
 
@@ -42,7 +48,7 @@ export default function PerfilAdmin() {
             {/* Estudiantes */}
             <div className="bg-gradient-to-r from-cyan-400 to-cyan-500 text-white p-4 rounded-xl shadow-md flex justify-between items-center">
               <div>
-                <p className="text-sm font-medium">estudiantes</p>
+                <p className="text-sm font-medium">Estudiantes</p>
                 <p className="text-lg font-bold">Total de estudiantes registrados 45</p>
               </div>
               <img

@@ -1,8 +1,9 @@
-import React from "react";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function Estudiante() {
   const navigate = useNavigate(); // 👈 Hook para navegar
+  const [dropdownOpen, setDropdownOpen] = useState(false); // Para el dropdown
 
   return (
     <div className="min-h-screen bg-gray-100 flex flex-col">
@@ -13,19 +14,70 @@ export default function Estudiante() {
           placeholder="Buscar cursos..."
           className="w-full sm:w-1/2 px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        {/* Botón para ver cursos */}
         <button
-          onClick={() => navigate("/Pagos")} // ✅ Navega correctamente
+          onClick={() => navigate("/")} // ✅ Navega correctamente
           className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition"
         >
           Ver cursos disponibles
         </button>
-        <div className="flex items-center space-x-2">
-          <div className="bg-gray-800 text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium">
-            NU
-          </div>
-          <span className="font-semibold text-sm sm:text-base">
-            Nombre usuario
-          </span>
+
+        {/* Botón usuario con dropdown */}
+        <div className="relative">
+          <button
+            className="flex items-center gap-2 bg-white px-4 py-2 rounded shadow hover:shadow-md transition"
+            onClick={() => setDropdownOpen((prev) => !prev)}
+          >
+            <div className="bg-gray-800 text-white w-8 h-8 flex items-center justify-center rounded-full text-sm font-medium">
+              NU
+            </div>
+            <span className="font-semibold text-sm sm:text-base">Nombre usuario ▼</span>
+          </button>
+
+          {/* Dropdown */}
+          {dropdownOpen && (
+            <div className="absolute right-0 mt-2 w-44 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() => navigate("/PerfilEstudiante")}
+              >
+                Perfil
+              </button>
+
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() => navigate("/EstudianteEST")}
+              >
+                Dashboar estudiante
+              </button>
+
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() =>
+                   navigate("/Pagos")}
+              >
+                Pagos
+              </button>
+
+               <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100"
+                onClick={() =>
+                   navigate("/DetallesCurso")}
+              >
+                Detalles del curso
+              </button>
+              <button
+                className="w-full text-left px-4 py-2 hover:bg-gray-100 text-red-600"
+                onClick={() => {
+                  localStorage.removeItem("role");
+                  navigate("/PerfilEstudiante");
+                }}
+              >
+                Cerrar sesión
+              </button>
+            </div>
+          )}
         </div>
       </header>
 

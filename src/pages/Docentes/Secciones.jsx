@@ -2,12 +2,20 @@ import React from "react";
 import { ArrowLeft, User, ClipboardList, FileText } from "lucide-react";
 
 export default function CourseView() {
+  // Función para regresar
+  const handleRegresar = () => {
+    window.history.back();
+  };
+
   return (
     <div className="min-h-screen bg-gray-50 p-4 md:p-6 lg:p-8">
-      {/* Back Button */}
-      <button className="flex items-center gap-2 text-gray-700 hover:text-gray-900 mb-6 transition">
+      {/* Back Button - FUNCIONAL */}
+      <button
+        onClick={handleRegresar}
+        className="flex items-center gap-2 text-gray-700 hover:text-blue-900 mb-6 transition-colors font-medium"
+      >
         <ArrowLeft className="w-5 h-5" />
-        <span className="font-medium">regresar</span>
+        <span>regresar</span>
       </button>
 
       <div className="max-w-7xl mx-auto">

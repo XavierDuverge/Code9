@@ -1,7 +1,10 @@
 import { Routes, Route, useLocation, Navigate } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
-// ADMIN
+// ✅ LOGIN
+import Login from "./pages/Login/Login2.jsx";
+
+// ✅ ADMIN
 import Admin from "./pages/Admin/Admin.jsx";
 import RegistrarEstudiante from "./pages/Admin/RegistrarEstudiante.jsx";
 import RegistrarDocente from "./pages/Admin/RegistrarDocente.jsx";
@@ -10,21 +13,19 @@ import RegistrarCurso from "./pages/Admin/RegistrarCurso.jsx";
 import RegistrarSeccion from "./pages/Admin/RegistrarSeccion.jsx";
 import Configuracion from "./pages/Admin/ConfiguracionAdmin.jsx";
 
-// ESTUDIANTE
+// ✅ ESTUDIANTE
 import Estudiante from "./pages/Estudiante/Estudiante.jsx";
 import PerfilEstudiante from "./pages/Estudiante/PerfilEstudiante.jsx";
 import CursoDetails from "./pages/Detallescurso/CursoDetails.jsx";
 import Pay from "./pages/Pagos/Pay.jsx";
+import EstudianteEST from "./pages/Estudiante/EstadisticasEST.jsx";
 
-// DOCENTE
+// ✅ DOCENTE
 import Docente from "./pages/Docentes/DashboarDocente.jsx";
 import Seccion1 from "./pages/Docentes/Secciones.jsx";
 import Notas from "./pages/Docentes/PublicarNotas.jsx";
 
-// LOGIN
-import Login from "./pages/Login/Login2.jsx";
-
-// COMPONENTE DE PROTECCIÓN
+// ✅ COMPONENTE DE PROTECCIÓN
 import ProtectedRoute from "./components/ProtectedRoute.jsx";
 
 function App() {
@@ -34,11 +35,10 @@ function App() {
     <div className="bg-white min-h-screen overflow-auto">
       <AnimatePresence mode="wait">
         <Routes location={location} key={location.pathname}>
-
-          {/* LOGIN */}
+          {/* LOGIN (pantalla inicial) */}
           <Route path="/" element={<Login />} />
 
-          {/*  ADMIN  */}
+          {/* 🛠️ ADMIN */}
           <Route
             path="/admin"
             element={
@@ -96,7 +96,7 @@ function App() {
             }
           />
 
-          {/*  ESTUDIANTE  */}
+          {/* 🎓 ESTUDIANTE */}
           <Route
             path="/estudiante"
             element={
@@ -129,8 +129,16 @@ function App() {
               </ProtectedRoute>
             }
           />
+          <Route
+            path="/EstudianteEST"
+            element={
+              <ProtectedRoute allowedRole="estudiante">
+                <EstudianteEST />
+              </ProtectedRoute>
+            }
+          />
 
-          {/*  DOCENTE  */}
+          {/* 🧑‍🏫 DOCENTE */}
           <Route
             path="/DashboardDocente"
             element={
@@ -156,7 +164,7 @@ function App() {
             }
           />
 
-          {/*  RUTA POR DEFECTO  */}
+          {/* 🚫 RUTA POR DEFECTO */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </AnimatePresence>

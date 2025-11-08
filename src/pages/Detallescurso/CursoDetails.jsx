@@ -3,13 +3,38 @@ import React from "react";
 const PaginaDeCurso = () => {
   return (
     <div className="font-sans bg-gray-100 text-gray-800 min-h-screen">
-      {/* Header - Barra de búsqueda */}
+      {/* Header - Barra de búsqueda con botón Regresar */}
       <header className="flex justify-between items-center bg-white px-5 py-3 shadow-sm">
+        {/* Botón Regresar */}
+        <button
+          onClick={() => window.history.back()}
+          className="flex items-center gap-2 text-gray-700 hover:text-[#24324a] font-medium text-sm transition-colors"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            className="h-5 w-5"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            strokeWidth={2}
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M15 19l-7-7 7-7"
+            />
+          </svg>
+          Regresar
+        </button>
+
+        {/* Barra de búsqueda */}
         <input
           type="text"
           placeholder="Buscar cursos..."
           className="w-80 px-3 py-2 border border-gray-300 rounded-md text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
+
+        {/* Botón NU */}
         <button className="bg-[#24324a] text-white font-bold px-4 py-2 rounded-md">
           NU
         </button>
